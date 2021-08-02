@@ -96,7 +96,7 @@ X attempt to call 'dog' (a table value)
 
 local dog = {}
 
-local metatable = {__call = function(table)
+local metatable = {__call = function(table) -- we set __call (just like we set __index)
 	print("I am now a functable!")
 end}
 
