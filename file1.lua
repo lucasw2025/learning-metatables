@@ -1,5 +1,5 @@
 -- https://www.youtube.com/watch?v=CYxMfVy5W00
--- video made August 18, 2011
+-- video made August 18th, 2011
 
 local john = {}
 print(john.money) --> nil, nonexistent
@@ -82,7 +82,7 @@ setting a metatable sets all of the second argument table's entries to the first
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- https://www.youtube.com/watch?v=Uz3B1rFZ4oM
--- video made August 19, 2011
+-- video made August 19th, 2011
 
 local dog = {}
 
@@ -166,6 +166,9 @@ because the table __call was set to getPerson through setmetatable, making it us
 --]]
 
 -----------------------------------------------------------------------------------------------------------------------------
+
+-- https://www.youtube.com/watch?v=F-xJq6s6lK0
+-- video made August 18th, 2021
 
 local dog = {}
 
