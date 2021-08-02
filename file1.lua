@@ -164,3 +164,42 @@ table: 0029C760 | Bill
 --[[ // conclusion
 because the table __call was set to getPerson through setmetatable, making it use the function assigned to __call when getPerson is called
 --]]
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+local dog = {}
+
+function dog:speak()
+	print("bark")
+end
+
+function dog:reactToDoorbell()
+	self:speak() -- the self is the table dog, since we assigned :reactToDoorbell() from it
+end
+
+local cat = {}
+
+function cat:speak()
+	print("meow")
+end
+
+dog:reactToDoorbel() --> bark
+dog.reactToDoorbel(dog) --> bark -- passed dog on as self
+
+dog.reactToDoorbell(cat) --> meow -- passed on cat as self, example of passing on self with '.' operator
+
+--[[ // full output
+bark
+bark
+meow
+--]]
+
+--[[ // possible tip
+don't use self unless you absolutely know what it is;
+eg. use dog:speak() instead of self:speak() when wanting bark,
+so that another table doesn't get passed on with speak function
+--]]
+
+--[[ conclusion (literally a comment of the youtube video)
+self is not a keyword. It's not magical. It's not managed by the language. It's just the name of the first argument passed to your function.
+--]]
