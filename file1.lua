@@ -75,6 +75,10 @@ the speed is 4 overrides anything John:new() sets with setmetatable
 100
 --]]
 
+--[[ // conclusion
+setting a metatable sets all of the second argument table's entries to the first argument table, ignoring already set entries in the first argument table
+--]]
+
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- https://www.youtube.com/watch?v=Uz3B1rFZ4oM
@@ -111,7 +115,7 @@ functables as writing a function that can have tables that assigned to it, so li
 
 local getPerson = {}
 
-local metatable = {__call function(table, key)
+local metatable = {__call = function(table, key)
 	local person = {name = key}
 	return person
 end}
@@ -132,7 +136,7 @@ table: 0021C670 | John
 local getPerson = {}
 getPerson.cache = {}
 
-local metatable = {__call function(table, key) -- the table (aka ({...})[1])) item is getPerson when we called setmetatable(getPerson, metatable) after this function
+local metatable = {__call = function(table, key) -- the table (aka ({...})[1])) item is getPerson when we called setmetatable(getPerson, metatable) after this function
 	if table.cache[key] then return table.cache[key] end -- return the already existing table
 	
 	local person = {name = key}
@@ -158,5 +162,5 @@ table: 0029C760 | Bill
 --]]
 
 --[[ // conclusion
-
+because the table __call was set to getPerson through setmetatable, making it use the function assigned to __call when getPerson is called
 --]]
