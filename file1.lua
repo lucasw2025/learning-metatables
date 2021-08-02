@@ -119,11 +119,44 @@ end}
 setmetatable(getPerson, metatable)
 
 local john = getPerson("John")
-print(john,john.name) --> table: [id] | John
+print(john,john.name) --> table: 0021C670 | John
 
 --[[ // full output
-table: [id] | John
+table: 0021C670 | John
 --]]
 
 -------------------------
 
+-- now attempting to only have one of each person
+
+local getPerson = {}
+getPerson.cache = {}
+
+local metatable = {__call function(table, key) -- the table (aka ({...})[1])) item is getPerson when we called setmetatable(getPerson, metatable) after this function
+	if table.cache[key] then return table.cache[key] end -- return the already existing table
+	
+	local person = {name = key}
+	table.cache[key] = person
+	return person
+end}
+
+setmetatable(getPerson, metatable)
+
+local john = getPerson("John")
+print(john,john.name) --> table: 0088C698 | John
+
+local anotherDude = getPerson("John")
+print(anotherDude, anotherDude.name) --> table: 0088C698 | John
+
+local bill = getPerson("Bill")
+print(bill, bill.name) --> table: 0029C760 | Bill
+
+--[[ // full output
+table: 0088C698 | John
+table: 0088C698 | John
+table: 0029C760 | Bill
+--]]
+
+--[[ // conclusion
+
+--]]
